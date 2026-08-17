@@ -1,0 +1,18 @@
+REM HVISUALIZE_INSTALL_DIR/HEXCHANGE_INSTALL_DIR must match the Exchange version used by HOOPS AI.
+REM A version mismatch loads two different builds of the same Exchange DLLs into one process and
+REM causes a crash.
+SET HVISUALIZE_INSTALL_DIR=Path\to\HOOPS_Visualize_2026.2.0
+SET HEXCHANGE_INSTALL_DIR=Path\to\HOOPS_Exchange_2026.2.0
+SET HAI_BRIDGE_INSTALL_DIR=Path\to\hoops_ai_native_bridge
+SET QT_INSTALL_DIR=Path\to\Qt\6.5.3\msvc2019_64
+
+REM (Optional, development only) Used to resolve site-packages at <HOOPS_AI_HOME>\.venv\Lib\site-packages.
+REM Not needed for redistribution: the client falls back to the .venv next to the exe (<exe>\..\.venv).
+SET HOOPS_AI_HOME=Path\to\HOOPS_AI\V1.1
+REM (Optional) Normally not required. The bridge auto-detects Python 3.12 from the registry (PEP 514).
+REM Only if auto-detection fails, uncomment the next line and set the path.
+REM SET HOOPS_AI_PYTHON_HOME=Path\to\Python\<version>
+
+SET PATH=%HAI_BRIDGE_INSTALL_DIR%\bin\win64;%QT_INSTALL_DIR%\bin;%PATH%
+
+CALL "Path\to\Microsoft Visual Studio\2022\<Edition>\Common7\IDE\devenv.exe" hps_qt_sandbox.sln

@@ -1,0 +1,29 @@
+# HVISUALIZE_INSTALL_DIR/HEXCHANGE_INSTALL_DIR must match the Exchange version used by HOOPS AI.
+# A version mismatch loads two different builds of the same Exchange shared libs into one process
+# and causes a crash.
+export HVISUALIZE_INSTALL_DIR=/path/to/HOOPS_Visualize_2026.2.0
+export HEXCHANGE_INSTALL_DIR=/path/to/HOOPS_Exchange_2026.2.0
+export HAI_BRIDGE_INSTALL_DIR=/path/to/hoops_ai_native_bridge
+export QT_INSTALL_DIR=/path/to/Qt/6.5.3/gcc_64
+
+# (Optional, development only) Used to resolve site-packages at <HOOPS_AI_HOME>/.venv/lib/pythonX.Y/site-packages.
+# Not needed for redistribution: the client falls back to the .venv next to the executable
+# (<exe_dir>/../.venv).
+export HOOPS_AI_HOME=/path/to/HOOPS_AI/V1.1
+# (Optional) Normally not required. The bridge auto-detects a shared Python 3.12
+# (libpython3.12.so.1.0) on the system. Only if auto-detection fails, uncomment the next line and
+# set the path to a Python 3.12 install with a shared library.
+# export HOOPS_AI_PYTHON_HOME=/path/to/python3.12
+
+export PATH="$QT_INSTALL_DIR/bin:$PATH"
+
+# Usage:
+#   cp _linux_env.sh.example _linux_env.sh   # then edit the paths above
+#   source _linux_env.sh
+#   mkdir -p build_linux && cd build_linux
+#   qmake ../hps_qt_sandbox.pro -o Makefile
+#   nice -n 10 make -j2                      # -j2 keeps memory usage low on constrained VMs;
+#                                             # raise -jN if you have more RAM/cores.
+#
+# The built executable is placed at $HVISUALIZE_INSTALL_DIR/bin/linux64/hps_qt_sandbox
+# (rpath is set to $ORIGIN plus the HAI bridge/Qt lib dirs, so it runs from that folder directly).

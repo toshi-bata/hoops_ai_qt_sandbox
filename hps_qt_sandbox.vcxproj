@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E7CBD8B1-2A20-3113-80AE-0F9C9E060777}</ProjectGuid>
+    <RootNamespace>hps_qt_sandbox</RootNamespace>
+    <Keyword>Qt4VSv1.0</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.26100.0</WindowsTargetPlatformMinVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <PlatformToolset>v143</PlatformToolset>
+    <OutputDirectory>$(HVISUALIZE_INSTALL_DIR)\bin\win64_v143\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>release\</IntermediateDirectory>
+    <PrimaryOutput>hps_qt_sandbox</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <PlatformToolset>v143</PlatformToolset>
+    <OutputDirectory>$(HVISUALIZE_INSTALL_DIR)\bin\win64_v143d\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>debug\</IntermediateDirectory>
+    <PrimaryOutput>hps_qt_sandbox</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(HVISUALIZE_INSTALL_DIR)\bin\win64_v143\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">hps_qt_sandbox</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(HVISUALIZE_INSTALL_DIR)\bin\win64_v143d\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">hps_qt_sandbox</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IgnoreImportLibrary>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;$(HVISUALIZE_INSTALL_DIR)\include;$(HEXCHANGE_INSTALL_DIR)\include;$(HAI_BRIDGE_INSTALL_DIR)\include;$(QT_INSTALL_DIR)\include;$(QT_INSTALL_DIR)\include\QtWidgets;$(QT_INSTALL_DIR)\include\QtGui;$(QT_INSTALL_DIR)\include\QtCore;release;/include;$(QT_INSTALL_DIR)\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -bigobj -Zc:__cplusplus -utf-8 -w34100 -w34189 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>release\</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;USING_EXCHANGE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>hps_core.lib;hps_sprk.lib;hps_sprk_ops.lib;hps_sprk_exchange.lib;hps_sprk_publish.lib;hoops_ai_bridge.lib;Qt6Widgets.lib;Qt6Gui.lib;Qt6Core.lib;Qt6EntryPoint.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(HVISUALIZE_INSTALL_DIR)\lib\win64_v143;$(QT_INSTALL_DIR)\lib;$(HAI_BRIDGE_INSTALL_DIR)\lib\win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>-bigobj "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkIncremental>false</LinkIncremental>
+      <OptimizeReferences>true</OptimizeReferences>
+      <OutputFile>$(OutDir)\hps_qt_sandbox.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;$(HVISUALIZE_INSTALL_DIR)\include;$(HEXCHANGE_INSTALL_DIR)\include;$(HAI_BRIDGE_INSTALL_DIR)\include;$(QT_INSTALL_DIR)\include;$(QT_INSTALL_DIR)\include\QtWidgets;$(QT_INSTALL_DIR)\include\QtGui;$(QT_INSTALL_DIR)\include\QtCore;debug;/include;$(QT_INSTALL_DIR)\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -bigobj -Zc:__cplusplus -utf-8 -w34100 -w34189 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>debug\</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;USING_EXCHANGE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>hps_core.lib;hps_sprk.lib;hps_sprk_ops.lib;hps_sprk_exchange.lib;hps_sprk_publish.lib;hoops_ai_bridge.lib;Qt6Widgetsd.lib;Qt6Guid.lib;Qt6Cored.lib;Qt6EntryPointd.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(HVISUALIZE_INSTALL_DIR)\lib\win64_v143d;$(QT_INSTALL_DIR)\lib;$(HAI_BRIDGE_INSTALL_DIR)\lib\win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>-bigobj "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <OutputFile>$(OutDir)\hps_qt_sandbox.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="HPSMainWindow.cpp" />
+    <ClCompile Include="HPSModelBrowser.cpp" />
+    <ClCompile Include="HPSPropertyBrowser.cpp" />
+    <ClCompile Include="HPSSegmentBrowser.cpp" />
+    <ClCompile Include="HPSWidget.cpp" />
+    <ClCompile Include="HoopsAiIndex.cpp" />
+    <ClCompile Include="SandboxHighlightOp.cpp" />
+    <ClCompile Include="SimilarityIndexPanel.cpp" />
+    <ClCompile Include="exchangeimportdialog.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HPSHandlers.h" />
+    <ClInclude Include="HoopsAiIndex.h" />
+    <CustomBuild Include="HPSMainWindow.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">HPSMainWindow.h;release\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include release/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" HPSMainWindow.h -o release\moc_HPSMainWindow.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MOC HPSMainWindow.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_HPSMainWindow.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HPSMainWindow.h;debug\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include debug/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" HPSMainWindow.h -o debug\moc_HPSMainWindow.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MOC HPSMainWindow.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\moc_HPSMainWindow.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="HPSModelBrowser.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">HPSModelBrowser.h;release\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include release/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" HPSModelBrowser.h -o release\moc_HPSModelBrowser.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MOC HPSModelBrowser.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_HPSModelBrowser.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HPSModelBrowser.h;debug\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include debug/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" HPSModelBrowser.h -o debug\moc_HPSModelBrowser.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MOC HPSModelBrowser.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\moc_HPSModelBrowser.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="HPSPropertyBrowser.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">HPSPropertyBrowser.h;release\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include release/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" HPSPropertyBrowser.h -o release\moc_HPSPropertyBrowser.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MOC HPSPropertyBrowser.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_HPSPropertyBrowser.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HPSPropertyBrowser.h;debug\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include debug/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" HPSPropertyBrowser.h -o debug\moc_HPSPropertyBrowser.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MOC HPSPropertyBrowser.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\moc_HPSPropertyBrowser.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="HPSSegmentBrowser.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">HPSSegmentBrowser.h;release\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include release/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" HPSSegmentBrowser.h -o release\moc_HPSSegmentBrowser.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MOC HPSSegmentBrowser.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_HPSSegmentBrowser.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HPSSegmentBrowser.h;debug\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include debug/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" HPSSegmentBrowser.h -o debug\moc_HPSSegmentBrowser.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MOC HPSSegmentBrowser.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\moc_HPSSegmentBrowser.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="HPSWidget.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">HPSWidget.h;release\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include release/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" HPSWidget.h -o release\moc_HPSWidget.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MOC HPSWidget.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_HPSWidget.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HPSWidget.h;debug\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include debug/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" HPSWidget.h -o debug\moc_HPSWidget.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MOC HPSWidget.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\moc_HPSWidget.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="SimilarityIndexPanel.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SimilarityIndexPanel.h;release\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include release/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" SimilarityIndexPanel.h -o release\moc_SimilarityIndexPanel.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MOC SimilarityIndexPanel.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_SimilarityIndexPanel.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SimilarityIndexPanel.h;debug\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include debug/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" SimilarityIndexPanel.h -o debug\moc_SimilarityIndexPanel.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MOC SimilarityIndexPanel.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\moc_SimilarityIndexPanel.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="SandboxHighlightOp.h" />
+    <CustomBuild Include="exchangeimportdialog.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">exchangeimportdialog.h;release\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include release/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" exchangeimportdialog.h -o release\moc_exchangeimportdialog.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MOC exchangeimportdialog.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_exchangeimportdialog.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">exchangeimportdialog.h;debug\moc_predefs.h;$(QT_INSTALL_DIR)\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QT_INSTALL_DIR)\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include debug/moc_predefs.h -I$(QT_INSTALL_DIR)/mkspecs/win32-msvc -I. -I$(HVISUALIZE_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include -I$(QT_INSTALL_DIR)/include/QtWidgets -I$(QT_INSTALL_DIR)/include/QtGui -I$(QT_INSTALL_DIR)/include/QtCore -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\ATLMFC\include" -I"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\VS\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\um" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\shared" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\winrt" -I"C:\Program Files (x86)\Windows Kits\10\\include\10.0.26100.0\\cppwinrt" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um" exchangeimportdialog.h -o debug\moc_exchangeimportdialog.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MOC exchangeimportdialog.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\moc_exchangeimportdialog.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="properties.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="debug\moc_HPSMainWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_HPSMainWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_HPSModelBrowser.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_HPSModelBrowser.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_HPSPropertyBrowser.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_HPSPropertyBrowser.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_HPSSegmentBrowser.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_HPSSegmentBrowser.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_HPSWidget.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_HPSWidget.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_SimilarityIndexPanel.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_SimilarityIndexPanel.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_exchangeimportdialog.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_exchangeimportdialog.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QT_INSTALL_DIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cl -Bx$(QT_INSTALL_DIR)\bin\qmake.exe -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -bigobj -Zc:__cplusplus -Zi -MDd -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QT_INSTALL_DIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;debug\moc_predefs.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generate moc_predefs.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\moc_predefs.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QT_INSTALL_DIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cl -Bx$(QT_INSTALL_DIR)\bin\qmake.exe -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -bigobj -Zc:__cplusplus -O2 -MD -std:c++17 -utf-8 -W3 -w34100 -w34189 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QT_INSTALL_DIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;release\moc_predefs.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generate moc_predefs.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\moc_predefs.h;%(Outputs)</Outputs>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </CustomBuild>
+    <ClCompile Include="debug\qrc_HPSMainWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\qrc_HPSMainWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Resources\HPSMainWindow.qrc">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\HPSMainWindow.qrc;$(QT_INSTALL_DIR)\bin\rcc.exe;Resources\hidden_img_solid.xpm;Resources\pmiview_productview.xpm;Resources\hidden_cadFastener.xpm;Resources\toolwindowselect.image.xpm;Resources\hidden_dir_product.xpm;Resources\hidden_cadrefer.xpm;Resources\il_class.xpm;Resources\hidden_dim_distance.xpm;Resources\include.xpm;Resources\toolzoomfit.image.xpm;Resources\hidden_img_plan.xpm;Resources\hidden_img_drawing_model.xpm;Resources\hidden_dir_product2.xpm;Resources\hidden_img_drawing_view.xpm;Resources\hidden_markup.xpm;Resources\dir_product2.xpm;Resources\img_compcurve.xpm;Resources\cadmeasurementpoint.xpm;Resources\dir_geom.xpm;Resources\img_drawing_view.xpm;Resources\hidden_cadtoler.xpm;Resources\toolapertureselect.image.xpm;Resources\img_drawing_sheet.xpm;Resources\hiddenLineIcon.xpm;Resources\hidden_dim_coordinate.xpm;Resources\hidden_img_compcurve.xpm;Resources\img_axis.xpm;Resources\highlighted_geometry.xpm;Resources\toolopenfile.image.xpm;Resources\dim_distance.xpm;Resources\hidden_img_points_cloud.xpm;Resources\static_model.xpm;Resources\hidden_img_direction.xpm;Resources\toolzoomwindow.image.xpm;Resources\group.xpm;Resources\cadrefer.xpm;Resources\cadview.xpm;Resources\hidden_cadspotwelding.xpm;Resources\img_points_cloud.xpm;Resources\segment.xpm;Resources\highlighted_group.xpm;Resources\img_unkn.xpm;Resources\dir_mark.xpm;Resources\cadrough.xpm;Resources\hidden_img_unkn.xpm;Resources\img_curv.xpm;Resources\highlighted_segment.xpm;Resources\hidden_cadrough.xpm;Resources\hidden_img_curv.xpm;Resources\geometry.xpm;Resources\cadspotwelding.xpm;Resources\toolpan.image.xpm;Resources\markup.xpm;Resources\toolfly.image.xpm;Resources\img_solid.xpm;Resources\toolorbit.image.xpm;Resources\img_direction.xpm;Resources\cadballoon.xpm;Resources\dir_product.xpm;Resources\cadlinewelding.xpm;Resources\hidden_img_drawing_sheet.xpm;Resources\reference.xpm;Resources\hidden_dir_geom.xpm;Resources\largeicon.xpm;Resources\cadlocator.xpm;Resources\hidden_cadlinewelding.xpm;Resources\smoothIcon.xpm;Resources\hidden_img_axis.xpm;Resources\cadtoler.xpm;Resources\hidden_cadmeasurementpoint.xpm;Resources\hidden_cadballoon.xpm;Resources\dim_coordinate.xpm;Resources\img_drawing_model.xpm;Resources\hidden_cadlocator.xpm;Resources\cadFastener.xpm;Resources\img_plan.xpm;Resources\attribute.xpm;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QT_INSTALL_DIR)\bin\rcc.exe -name HPSMainWindow --no-zstd Resources\HPSMainWindow.qrc -o release\qrc_HPSMainWindow.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">RCC Resources/HPSMainWindow.qrc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\qrc_HPSMainWindow.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\HPSMainWindow.qrc;$(QT_INSTALL_DIR)\bin\rcc.exe;Resources\hidden_img_solid.xpm;Resources\pmiview_productview.xpm;Resources\hidden_cadFastener.xpm;Resources\toolwindowselect.image.xpm;Resources\hidden_dir_product.xpm;Resources\hidden_cadrefer.xpm;Resources\il_class.xpm;Resources\hidden_dim_distance.xpm;Resources\include.xpm;Resources\toolzoomfit.image.xpm;Resources\hidden_img_plan.xpm;Resources\hidden_img_drawing_model.xpm;Resources\hidden_dir_product2.xpm;Resources\hidden_img_drawing_view.xpm;Resources\hidden_markup.xpm;Resources\dir_product2.xpm;Resources\img_compcurve.xpm;Resources\cadmeasurementpoint.xpm;Resources\dir_geom.xpm;Resources\img_drawing_view.xpm;Resources\hidden_cadtoler.xpm;Resources\toolapertureselect.image.xpm;Resources\img_drawing_sheet.xpm;Resources\hiddenLineIcon.xpm;Resources\hidden_dim_coordinate.xpm;Resources\hidden_img_compcurve.xpm;Resources\img_axis.xpm;Resources\highlighted_geometry.xpm;Resources\toolopenfile.image.xpm;Resources\dim_distance.xpm;Resources\hidden_img_points_cloud.xpm;Resources\static_model.xpm;Resources\hidden_img_direction.xpm;Resources\toolzoomwindow.image.xpm;Resources\group.xpm;Resources\cadrefer.xpm;Resources\cadview.xpm;Resources\hidden_cadspotwelding.xpm;Resources\img_points_cloud.xpm;Resources\segment.xpm;Resources\highlighted_group.xpm;Resources\img_unkn.xpm;Resources\dir_mark.xpm;Resources\cadrough.xpm;Resources\hidden_img_unkn.xpm;Resources\img_curv.xpm;Resources\highlighted_segment.xpm;Resources\hidden_cadrough.xpm;Resources\hidden_img_curv.xpm;Resources\geometry.xpm;Resources\cadspotwelding.xpm;Resources\toolpan.image.xpm;Resources\markup.xpm;Resources\toolfly.image.xpm;Resources\img_solid.xpm;Resources\toolorbit.image.xpm;Resources\img_direction.xpm;Resources\cadballoon.xpm;Resources\dir_product.xpm;Resources\cadlinewelding.xpm;Resources\hidden_img_drawing_sheet.xpm;Resources\reference.xpm;Resources\hidden_dir_geom.xpm;Resources\largeicon.xpm;Resources\cadlocator.xpm;Resources\hidden_cadlinewelding.xpm;Resources\smoothIcon.xpm;Resources\hidden_img_axis.xpm;Resources\cadtoler.xpm;Resources\hidden_cadmeasurementpoint.xpm;Resources\hidden_cadballoon.xpm;Resources\dim_coordinate.xpm;Resources\img_drawing_model.xpm;Resources\hidden_cadlocator.xpm;Resources\cadFastener.xpm;Resources\img_plan.xpm;Resources\attribute.xpm;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QT_INSTALL_DIR)\bin\rcc.exe -name HPSMainWindow --no-zstd Resources\HPSMainWindow.qrc -o debug\qrc_HPSMainWindow.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">RCC Resources/HPSMainWindow.qrc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\qrc_HPSMainWindow.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <None Include="Resources\attribute.xpm" />
+    <None Include="Resources\cadFastener.xpm" />
+    <None Include="Resources\cadballoon.xpm" />
+    <None Include="Resources\cadlinewelding.xpm" />
+    <None Include="Resources\cadlocator.xpm" />
+    <None Include="Resources\cadmeasurementpoint.xpm" />
+    <None Include="Resources\cadrefer.xpm" />
+    <None Include="Resources\cadrough.xpm" />
+    <None Include="Resources\cadspotwelding.xpm" />
+    <None Include="Resources\cadtoler.xpm" />
+    <None Include="Resources\cadview.xpm" />
+    <None Include="Resources\dim_coordinate.xpm" />
+    <None Include="Resources\dim_distance.xpm" />
+    <None Include="Resources\dir_geom.xpm" />
+    <None Include="Resources\dir_mark.xpm" />
+    <None Include="Resources\dir_product.xpm" />
+    <None Include="Resources\dir_product2.xpm" />
+    <None Include="Resources\geometry.xpm" />
+    <None Include="Resources\group.xpm" />
+    <None Include="Resources\hiddenLineIcon.xpm" />
+    <None Include="Resources\hidden_cadFastener.xpm" />
+    <None Include="Resources\hidden_cadballoon.xpm" />
+    <None Include="Resources\hidden_cadlinewelding.xpm" />
+    <None Include="Resources\hidden_cadlocator.xpm" />
+    <None Include="Resources\hidden_cadmeasurementpoint.xpm" />
+    <None Include="Resources\hidden_cadrefer.xpm" />
+    <None Include="Resources\hidden_cadrough.xpm" />
+    <None Include="Resources\hidden_cadspotwelding.xpm" />
+    <None Include="Resources\hidden_cadtoler.xpm" />
+    <None Include="Resources\hidden_dim_coordinate.xpm" />
+    <None Include="Resources\hidden_dim_distance.xpm" />
+    <None Include="Resources\hidden_dir_geom.xpm" />
+    <None Include="Resources\hidden_dir_product.xpm" />
+    <None Include="Resources\hidden_dir_product2.xpm" />
+    <None Include="Resources\hidden_img_axis.xpm" />
+    <None Include="Resources\hidden_img_compcurve.xpm" />
+    <None Include="Resources\hidden_img_curv.xpm" />
+    <None Include="Resources\hidden_img_direction.xpm" />
+    <None Include="Resources\hidden_img_drawing_model.xpm" />
+    <None Include="Resources\hidden_img_drawing_sheet.xpm" />
+    <None Include="Resources\hidden_img_drawing_view.xpm" />
+    <None Include="Resources\hidden_img_plan.xpm" />
+    <None Include="Resources\hidden_img_points_cloud.xpm" />
+    <None Include="Resources\hidden_img_solid.xpm" />
+    <None Include="Resources\hidden_img_unkn.xpm" />
+    <None Include="Resources\hidden_markup.xpm" />
+    <None Include="Resources\highlighted_geometry.xpm" />
+    <None Include="Resources\highlighted_group.xpm" />
+    <None Include="Resources\highlighted_segment.xpm" />
+    <None Include="Resources\il_class.xpm" />
+    <None Include="Resources\img_axis.xpm" />
+    <None Include="Resources\img_compcurve.xpm" />
+    <None Include="Resources\img_curv.xpm" />
+    <None Include="Resources\img_direction.xpm" />
+    <None Include="Resources\img_drawing_model.xpm" />
+    <None Include="Resources\img_drawing_sheet.xpm" />
+    <None Include="Resources\img_drawing_view.xpm" />
+    <None Include="Resources\img_plan.xpm" />
+    <None Include="Resources\img_points_cloud.xpm" />
+    <None Include="Resources\img_solid.xpm" />
+    <None Include="Resources\img_unkn.xpm" />
+    <None Include="Resources\include.xpm" />
+    <None Include="Resources\largeicon.xpm" />
+    <None Include="Resources\markup.xpm" />
+    <None Include="Resources\pmiview_productview.xpm" />
+    <None Include="Resources\reference.xpm" />
+    <None Include="Resources\segment.xpm" />
+    <None Include="Resources\smoothIcon.xpm" />
+    <None Include="Resources\static_model.xpm" />
+    <None Include="Resources\toolapertureselect.image.xpm" />
+    <None Include="Resources\toolfly.image.xpm" />
+    <None Include="Resources\toolopenfile.image.xpm" />
+    <None Include="Resources\toolorbit.image.xpm" />
+    <None Include="Resources\toolpan.image.xpm" />
+    <None Include="Resources\toolwindowselect.image.xpm" />
+    <None Include="Resources\toolzoomfit.image.xpm" />
+    <None Include="Resources\toolzoomwindow.image.xpm" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

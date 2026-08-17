@@ -1,0 +1,30 @@
+.vs/
+debug/
+release/
+_VS2022.bat
+_linux_env.sh
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.log
+.qmake.stash
+hps_qt_sandbox.vcxproj.user
+hoops_license.h
+ml_metrics/
+training_errors.log
+
+# Linux/qmake out-of-source build directory (generated: Makefile, *.o, moc_*, build.log, ...)
+build_linux/
+
+# Runtime temp dir created by the embedded HOOPS AI thumbnail/embedding pipeline
+.hoops_embeddings_temp/
+
+# Diagnostic dump written by the app on load errors
+error_summary.json
+
+# Qt build artifacts generated at compile time (rcc/moc output)
+qrc_*.cpp
+moc_*.cpp
+moc_*.h

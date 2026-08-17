@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="HPSMainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HPSModelBrowser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HPSPropertyBrowser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HPSSegmentBrowser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HPSWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HoopsAiIndex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SandboxHighlightOp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SimilarityIndexPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exchangeimportdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HPSHandlers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HoopsAiIndex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="HPSMainWindow.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HPSModelBrowser.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HPSPropertyBrowser.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HPSSegmentBrowser.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HPSWidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SimilarityIndexPanel.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="SandboxHighlightOp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="exchangeimportdialog.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="properties.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="debug\moc_HPSMainWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_HPSMainWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_HPSModelBrowser.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_HPSModelBrowser.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_HPSPropertyBrowser.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_HPSPropertyBrowser.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_HPSSegmentBrowser.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_HPSSegmentBrowser.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_HPSWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_HPSWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_SimilarityIndexPanel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_SimilarityIndexPanel.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_exchangeimportdialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_exchangeimportdialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <ClCompile Include="debug\qrc_HPSMainWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\qrc_HPSMainWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Resources\HPSMainWindow.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <None Include="Resources\attribute.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\cadFastener.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\cadballoon.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\cadlinewelding.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\cadlocator.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\cadmeasurementpoint.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\cadrefer.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\cadrough.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\cadspotwelding.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\cadtoler.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\cadview.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dim_coordinate.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dim_distance.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dir_geom.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dir_mark.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dir_product.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dir_product2.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\geometry.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\group.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hiddenLineIcon.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_cadFastener.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_cadballoon.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_cadlinewelding.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_cadlocator.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_cadmeasurementpoint.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_cadrefer.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_cadrough.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_cadspotwelding.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_cadtoler.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_dim_coordinate.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_dim_distance.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_dir_geom.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_dir_product.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_dir_product2.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_img_axis.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_img_compcurve.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_img_curv.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_img_direction.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_img_drawing_model.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_img_drawing_sheet.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_img_drawing_view.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_img_plan.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_img_points_cloud.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_img_solid.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_img_unkn.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\hidden_markup.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\highlighted_geometry.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\highlighted_group.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\highlighted_segment.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\il_class.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\img_axis.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\img_compcurve.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\img_curv.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\img_direction.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\img_drawing_model.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\img_drawing_sheet.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\img_drawing_view.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\img_plan.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\img_points_cloud.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\img_solid.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\img_unkn.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\include.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\largeicon.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\markup.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\pmiview_productview.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\reference.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\segment.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\smoothIcon.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\static_model.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\toolapertureselect.image.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\toolfly.image.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\toolopenfile.image.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\toolorbit.image.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\toolpan.image.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\toolwindowselect.image.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\toolzoomfit.image.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\toolzoomwindow.image.xpm">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -13,7 +13,7 @@ A Qt sample application that combines **HOOPS Visualize Desktop**, **HOOPS Excha
 
 It is derived from the `qt_sandbox` sample shipped with HOOPS Visualize Desktop, extended with the HOOPS AI
 integration. The C API it calls lives in a companion repository,
-[`hoops_ai_native_bridge`](../hoops_ai_native_bridge), which embeds a Python interpreter running the
+[`hoops_ai_native_bridge`](https://github.com/toshi-bata/hoops_ai_native_bridge), which embeds a Python interpreter running the
 HOOPS AI package.
 
 > **This is a proof of concept, not a product.** It exists to demonstrate that HOOPS AI can be made
@@ -305,7 +305,7 @@ The dialog's defaults are auto-detected for the machine and are all editable:
 |-------|---------|-------|
 | Pass 1 workers | number of **physical** CPU cores | The embedding sweet spot; logical cores add little. |
 | Pass 1 time limit | **120 s** | Short budget so light files stream through quickly. |
-| Pass 2 workers | `floor(free RAM / 4 GB)` | Each heavy worker needs several GB of headroom. |
+| Pass 2 workers | `round(free RAM / 4 GB)` | Each heavy worker needs several GB of headroom. |
 | Pass 2 time limit | **1200 s** | Generous budget to let a heavy assembly finish. |
 
 Raise the **Pass 2 time limit** if large assemblies are still being skipped; lower the **Pass 2

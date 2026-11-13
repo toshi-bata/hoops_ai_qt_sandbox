@@ -77,9 +77,11 @@ namespace {
 // resulting default is only a guideline.
 constexpr int kPass1WorkerFootprintMB = 768;
 
-// Fraction of total physical RAM kept in reserve when sizing the pass-1 default. hoops_ai defers a
-// part to its slow single-worker heavy fallback once system memory use passes 90% (its
-// min_available_ram_percent = 10), so leaving 10% of total RAM free keeps the default below that line.
+// Fraction of total physical RAM kept in reserve when sizing the pass-1 default. By default
+// hoops_ai keeps 10% of total RAM free (min_available_ram_percent = 10); when available RAM drops
+// below that it restarts workers, and a file that causes two or more restarts is flagged heavy and
+// retried with one worker and twice time_limit_large. Leaving 10% of total RAM free keeps the
+// default below that restart threshold.
 constexpr int kPass1ReservePercent = 10;
 
 // Bytes of currently-available physical RAM, used to size the default pass-2 worker count. Pass 2
@@ -100,8 +102,9 @@ quint64 detectAvailablePhysMemoryBytes()
 }
 
 // Bytes of total physical RAM, used to compute the reserve (a fraction of total RAM) kept free so
-// the pass-1 default does not push system memory use toward the 90% mark at which hoops_ai starts
-// deferring parts to its single-worker heavy fallback. Returns 0 when it cannot be determined.
+// the pass-1 default does not drop available RAM below hoops_ai's 10% threshold, at which it
+// restarts workers (and flags files that cause repeated restarts as heavy). Returns 0 when it
+// cannot be determined.
 quint64 detectTotalPhysMemoryBytes()
 {
 #ifdef Q_OS_WIN
@@ -1801,9 +1804,10 @@ void SimilarityIndexPanel::onAddFolder()
     // so workers no longer oversubscribe CPU threads and pass 1 scales up to the LOGICAL processor
     // count (benchmarks: with 1 thread/worker a 16c/32t box peaked at 32 workers = logical count,
     // 2.25x the unlimited best). On a workstation free RAM, not CPU, is the first limit. The cap
-    // keeps a reserve (kPass1ReservePercent of TOTAL RAM) free so the default stays under the 90%
-    // mark at which hoops_ai defers parts to its heavy fallback, then divides the remaining free RAM
-    // by the measured per-worker footprint: memCap = floor((freeRAM - totalRAM*reserve%) / footprint).
+    // keeps a reserve (kPass1ReservePercent of TOTAL RAM) free so the default stays above hoops_ai's
+    // 10% available-RAM threshold (below which it restarts workers and may flag files as heavy),
+    // then divides the remaining free RAM by the measured per-worker footprint:
+    // memCap = floor((freeRAM - totalRAM*reserve%) / footprint).
     // If either free or total RAM cannot be read, apply no memory cap and use the logical count alone.
     int const logicalProcessors = qMax(1, QThread::idealThreadCount());
     quint64 const freeBytes = detectAvailablePhysMemoryBytes();
@@ -1872,7 +1876,8 @@ void SimilarityIndexPanel::onAddFolder()
     dlgLayout->addWidget(new QLabel(pass1DefaultNote, &dlg));
     auto* pass1CautionLabel = new QLabel(
         tr("Keep this window visible and avoid other heavy work while it runs: memory above 90% "
-           "sends parts to a slow single-worker pass, and Windows may move a hidden or minimized "
+           "makes hoops_ai restart workers and can send parts to a slow single-worker retry, and "
+           "Windows may move a hidden or minimized "
            "window's work onto efficiency cores."), &dlg);
     pass1CautionLabel->setWordWrap(true);
     dlgLayout->addWidget(pass1CautionLabel);

@@ -311,10 +311,13 @@ The dialog's defaults are auto-detected for the machine and are all editable:
 The defaults are only a starting point — adjust them for your data and machine:
 
 - Lower **Pass 1 workers** for data with many heavy files, or on a PC with little RAM.
-- When memory use crosses **90%**, hoops_ai defers parts as *heavy* and processes them last with a
-  single worker and no time limit. Running other heavy work on the same PC during the add makes this
-  far more likely. On a 32 GB laptop, 20 workers already sit at 83–86% memory use — close to the 90%
-  line — so parts can tip into the heavy fallback if you keep working on the same PC.
+- When available RAM drops below hoops_ai's default **10% of total** reserve
+  (`min_available_ram_percent = 10`), hoops_ai restarts workers; a file that triggers two or more
+  restarts is flagged *heavy* and retried with one worker and twice the large time limit (see the
+  [embed_shape_batch Specifications Guide](https://forum.techsoft3d.com/t/embed-shape-batch-specifications-guide/5153)).
+  Running other heavy work on the same PC during the add makes this far more likely. On a 32 GB
+  laptop, 20 workers already sit at 83–86% memory use — close to that threshold — so parts can tip
+  into the heavy retry if you keep working on the same PC.
 - Windows 11 power throttling (EcoQoS) can move work onto efficiency cores when the window is hidden
   or minimized, slowing the add dramatically. Run large batches on a dedicated machine for
   predictable throughput.

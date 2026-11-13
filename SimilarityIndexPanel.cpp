@@ -69,10 +69,18 @@
 namespace {
 
 // Estimated resident memory of a single pass-1 embedding worker, used to cap the default pass-1
-// worker count by free physical RAM. This matches hoops_ai_native_bridge's HOOPS_AI_MODEL_FOOTPRINT_MB
-// default (2048 MiB): each worker holds roughly one model footprint in memory, so on a workstation
-// free RAM, not CPU, is usually the first limit on how many pass-1 workers can run.
-constexpr int kPass1WorkerFootprintMB = 2048;
+// worker count by free physical RAM. Measured on a Windows 11 laptop with 32 GB RAM, with the
+// native bridge pinning each worker's intra-op threads to 1: registering TMCAD's 500 files with
+// 20 workers peaked at ~0.62 GB per worker, so 768 MiB adds a little headroom over that. This is
+// deliberately NOT the bridge's HOOPS_AI_MODEL_FOOTPRINT_MB (2048), which sizes the bridge's own
+// automatic worker count for a different purpose. Heavier data uses more per worker, so the
+// resulting default is only a guideline.
+constexpr int kPass1WorkerFootprintMB = 768;
+
+// Fraction of total physical RAM kept in reserve when sizing the pass-1 default. hoops_ai defers a
+// part to its slow single-worker heavy fallback once system memory use passes 90% (its
+// min_available_ram_percent = 10), so leaving 10% of total RAM free keeps the default below that line.
+constexpr int kPass1ReservePercent = 10;
 
 // Bytes of currently-available physical RAM, used to size the default pass-2 worker count. Pass 2
 // re-embeds the memory-heaviest assemblies, so each worker needs enough headroom (hoops_ai's own
@@ -86,6 +94,22 @@ quint64 detectAvailablePhysMemoryBytes()
     if (!GlobalMemoryStatusEx(&ms))
         return 0;
     return static_cast<quint64>(ms.ullAvailPhys);
+#else
+    return 0;
+#endif
+}
+
+// Bytes of total physical RAM, used to compute the reserve (a fraction of total RAM) kept free so
+// the pass-1 default does not push system memory use toward the 90% mark at which hoops_ai starts
+// deferring parts to its single-worker heavy fallback. Returns 0 when it cannot be determined.
+quint64 detectTotalPhysMemoryBytes()
+{
+#ifdef Q_OS_WIN
+    MEMORYSTATUSEX ms{};
+    ms.dwLength = sizeof(ms);
+    if (!GlobalMemoryStatusEx(&ms))
+        return 0;
+    return static_cast<quint64>(ms.ullTotalPhys);
 #else
     return 0;
 #endif
@@ -1776,17 +1800,22 @@ void SimilarityIndexPanel::onAddFolder()
     // pins each worker's intra-op (BLAS/OpenMP) threads to 1 for the duration of embed_shape_batch,
     // so workers no longer oversubscribe CPU threads and pass 1 scales up to the LOGICAL processor
     // count (benchmarks: with 1 thread/worker a 16c/32t box peaked at 32 workers = logical count,
-    // 2.25x the unlimited best). On a workstation free RAM, not CPU, is the first limit: each worker
-    // holds roughly one model footprint in memory, so cap the default at floor(freeRAM / footprint).
-    // If free RAM cannot be read, apply no memory cap and use the logical count alone.
+    // 2.25x the unlimited best). On a workstation free RAM, not CPU, is the first limit. The cap
+    // keeps a reserve (kPass1ReservePercent of TOTAL RAM) free so the default stays under the 90%
+    // mark at which hoops_ai defers parts to its heavy fallback, then divides the remaining free RAM
+    // by the measured per-worker footprint: memCap = floor((freeRAM - totalRAM*reserve%) / footprint).
+    // If either free or total RAM cannot be read, apply no memory cap and use the logical count alone.
     int const logicalProcessors = qMax(1, QThread::idealThreadCount());
     quint64 const freeBytes = detectAvailablePhysMemoryBytes();
+    quint64 const totalBytes = detectTotalPhysMemoryBytes();
     quint64 const pass1FootprintBytes = quint64(kPass1WorkerFootprintMB) * 1024 * 1024;
-    int pass1MemCap = 0;              // 0 = free RAM unknown, no cap applied
+    int pass1MemCap = 0;              // 0 = free/total RAM unknown, no cap applied
     bool pass1MemLimited = false;     // true when the free-RAM cap, not the logical count, won
     int defPass1Workers = logicalProcessors;
-    if (freeBytes > 0) {
-        pass1MemCap = static_cast<int>(freeBytes / pass1FootprintBytes);
+    if (freeBytes > 0 && totalBytes > 0) {
+        quint64 const reserveBytes = totalBytes / 100 * kPass1ReservePercent;
+        quint64 const budgetBytes = (freeBytes > reserveBytes) ? (freeBytes - reserveBytes) : 0;
+        pass1MemCap = static_cast<int>(budgetBytes / pass1FootprintBytes);
         if (pass1MemCap < 1)
             pass1MemCap = 1;
         if (pass1MemCap < defPass1Workers) {
@@ -1811,15 +1840,17 @@ void SimilarityIndexPanel::onAddFolder()
     double const freeGb = static_cast<double>(freeBytes) / (quint64(1024) * 1024 * 1024);
     double const footprintGb = static_cast<double>(kPass1WorkerFootprintMB) / 1024.0;
     QString pass1DefaultNote;
-    if (freeBytes == 0) {
+    if (pass1MemCap == 0) {
         pass1DefaultNote = tr("Pass 1 default: %1 workers = logical processors.")
                                .arg(defPass1Workers);
     } else if (pass1MemLimited) {
         pass1DefaultNote = tr("Pass 1 default: %1 workers, limited by free RAM "
-                              "(%2 GB free, ~%3 GB per worker); logical processors: %4.")
+                              "(%2 GB free, keeping %3% of RAM in reserve, ~%4 GB per worker); "
+                              "logical processors: %5.")
                                .arg(defPass1Workers)
                                .arg(freeGb, 0, 'f', 1)
-                               .arg(footprintGb, 0, 'f', 0)
+                               .arg(kPass1ReservePercent)
+                               .arg(footprintGb, 0, 'f', 2)
                                .arg(logicalProcessors);
     } else {
         pass1DefaultNote = tr("Pass 1 default: %1 workers = logical processors "

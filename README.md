@@ -303,7 +303,7 @@ The dialog's defaults are auto-detected for the machine and are all editable:
 
 | Field | Default | Notes |
 |-------|---------|-------|
-| Pass 1 workers | number of **logical** processors, capped by `floor(free RAM / 2 GB)` | The native bridge pins each worker's intra-op (BLAS/OpenMP) threads to 1 during embedding, so workers no longer oversubscribe the CPU and Pass 1 scales to the logical count; on a workstation free RAM (≈2 GB per worker) is usually the first limit. |
+| Pass 1 workers | number of **logical** processors, capped by `floor((free RAM − 10% of total RAM) / 0.75 GB)` | The native bridge pins each worker's intra-op (BLAS/OpenMP) threads to 1 during embedding, so workers no longer oversubscribe the CPU and Pass 1 scales to the logical count; on a workstation free RAM is the first limit. Measured ≈0.62 GB per worker (32 GB laptop, TMCAD 500 files, 20 workers), so ~0.75 GB per worker with a little headroom; the 10% reserve keeps use under the 90% heavy-fallback line. |
 | Pass 1 time limit | **120 s** | Short budget so light files stream through quickly. |
 | Pass 2 workers | `round(free RAM / 4 GB)` | Each heavy worker needs several GB of headroom. |
 | Pass 2 time limit | **1200 s** | Generous budget to let a heavy assembly finish. |
@@ -313,7 +313,8 @@ The defaults are only a starting point — adjust them for your data and machine
 - Lower **Pass 1 workers** for data with many heavy files, or on a PC with little RAM.
 - When memory use crosses **90%**, hoops_ai defers parts as *heavy* and processes them last with a
   single worker and no time limit. Running other heavy work on the same PC during the add makes this
-  far more likely.
+  far more likely. On a 32 GB laptop, 20 workers already sit at 83–86% memory use — close to the 90%
+  line — so parts can tip into the heavy fallback if you keep working on the same PC.
 - Windows 11 power throttling (EcoQoS) can move work onto efficiency cores when the window is hidden
   or minimized, slowing the add dramatically. Run large batches on a dedicated machine for
   predictable throughput.

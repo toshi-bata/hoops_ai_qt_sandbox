@@ -56,8 +56,6 @@
 #include <QPointer>
 #include <QImage>
 
-#include <vector>
-
 #ifdef Q_OS_WIN
 #  ifndef WIN32_LEAN_AND_MEAN
 #    define WIN32_LEAN_AND_MEAN
@@ -70,38 +68,11 @@
 
 namespace {
 
-// Number of physical CPU cores, used as the default pass-1 worker count for the folder add.
-// Benchmarks (see hoops-ai-embeddings-benchmark: make_report_full / plan.md / README_heavy) put the
-// index-embedding sweet spot near the PHYSICAL-core count; pushing to the logical count only adds
-// RAM pressure for little gain. Returns 0 when it cannot be determined so the caller can fall back
-// to QThread::idealThreadCount().
-int detectPhysicalCores()
-{
-#ifdef Q_OS_WIN
-    DWORD len = 0;
-    GetLogicalProcessorInformationEx(RelationProcessorCore, nullptr, &len);
-    if (len == 0)
-        return 0;
-    std::vector<char> buf(len);
-    auto* first = reinterpret_cast<SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX*>(buf.data());
-    if (!GetLogicalProcessorInformationEx(RelationProcessorCore, first, &len))
-        return 0;
-    int cores = 0;
-    char* ptr = buf.data();
-    char* const end = buf.data() + len;
-    while (ptr < end) {
-        auto* cur = reinterpret_cast<SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX*>(ptr);
-        if (cur->Relationship == RelationProcessorCore)
-            ++cores;
-        if (cur->Size == 0)
-            break;
-        ptr += cur->Size;
-    }
-    return cores;
-#else
-    return 0;
-#endif
-}
+// Estimated resident memory of a single pass-1 embedding worker, used to cap the default pass-1
+// worker count by free physical RAM. This matches hoops_ai_native_bridge's HOOPS_AI_MODEL_FOOTPRINT_MB
+// default (2048 MiB): each worker holds roughly one model footprint in memory, so on a workstation
+// free RAM, not CPU, is usually the first limit on how many pass-1 workers can run.
+constexpr int kPass1WorkerFootprintMB = 2048;
 
 // Bytes of currently-available physical RAM, used to size the default pass-2 worker count. Pass 2
 // re-embeds the memory-heaviest assemblies, so each worker needs enough headroom (hoops_ai's own
@@ -182,12 +153,22 @@ QMap<QString, QString> readErrorSummaryReasons()
 // deferred to the built-in single-worker RAM fallback ("Heavy Files (1 worker)"). Format: '#'
 // comment/header lines, a blank line, then one forward-slash path per line. Returns the paths
 // (original text, not normalized) or an empty list when absent.
-QStringList readTooHeavyFiles()
+//
+// The log is never cleared between runs: hoops_ai only rewrites it at the end of a pass. To avoid
+// mixing in a stale list from an earlier run (possibly a different folder), the caller passes the
+// time that pass started; a log last modified before then cannot describe this pass and is read as
+// empty.
+QStringList readTooHeavyFiles(const QDateTime& notBefore)
 {
     QStringList heavy;
     QString const path = QDir(QDir::currentPath()).filePath(QStringLiteral("too_heavy_files.log"));
+    QFileInfo const info(path);
+    if (!info.exists())
+        return heavy;
+    if (notBefore.isValid() && info.lastModified() < notBefore)
+        return heavy;  // stale log from a previous pass/run -> treat as empty
     QFile file(path);
-    if (!file.exists() || !file.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return heavy;
     QTextStream in(&file);
     while (!in.atEnd()) {
@@ -1027,13 +1008,24 @@ void IndexWorker::doAddFolder(const QStringList& cadPaths, int pass1Workers, int
     QStringList p1FailedFiles;
     QString p1Warning;
     QElapsedTimer p1Timer;
+    // Record when pass 1 starts so we only read a too_heavy_files.log that this pass wrote (not a
+    // stale one from an earlier run in a different folder).
+    QDateTime const pass1Start = QDateTime::currentDateTime();
     p1Timer.start();
     bool const ok1 = HoopsAiIndex::addCadFolder(cadPaths, pass1Workers, pass1TimeLimit,
                                                 p1Added, p1Failed, p1FailedFiles, p1Warning);
     pass1Secs = p1Timer.nsecsElapsed() / 1e9;
     // Feature A: hoops_ai wrote too_heavy_files.log into this process CWD for pass 1 (RAM fallback
-    // list). Capture it now, before pass 2 overwrites it.
-    QStringList heavyFlagged = readTooHeavyFiles();
+    // list). Capture it now, before pass 2 overwrites it. Keep only entries this pass actually
+    // processed, in case the log still carries unrelated paths.
+    QSet<QString> pass1Keys;
+    pass1Keys.reserve(cadPaths.size());
+    for (const QString& f : cadPaths)
+        pass1Keys.insert(normPathKey(f));
+    QStringList heavyFlagged;
+    for (const QString& f : readTooHeavyFiles(pass1Start))
+        if (pass1Keys.contains(normPathKey(f)))
+            heavyFlagged << f;
     if (!ok1) {
         // The whole pass-1 call failed; nothing was embedded. Surface the error.
         HoopsAiIndex::setAddFolderProgressCallback({});
@@ -1090,13 +1082,19 @@ void IndexWorker::doAddFolder(const QStringList& cadPaths, int pass1Workers, int
         int p2Added = 0, p2Failed = 0;
         QStringList p2FailedFiles;
         QElapsedTimer p2Timer;
+        QDateTime const pass2Start = QDateTime::currentDateTime();
         p2Timer.start();
         bool const ok2 = HoopsAiIndex::addCadFolder(pass2Retry, pass2Workers, pass2TimeLimit,
                                                     p2Added, p2Failed, p2FailedFiles, p2Warning);
         pass2Secs = p2Timer.nsecsElapsed() / 1e9;
-        // Union pass-2's RAM-fallback list into the heavy-flagged set for the report.
-        for (const QString& f : readTooHeavyFiles())
-            if (!heavyFlagged.contains(f))
+        // Union pass-2's RAM-fallback list into the heavy-flagged set for the report. Only read a
+        // log this pass wrote, and keep only entries pass 2 actually processed.
+        QSet<QString> pass2Keys;
+        pass2Keys.reserve(pass2Retry.size());
+        for (const QString& f : pass2Retry)
+            pass2Keys.insert(normPathKey(f));
+        for (const QString& f : readTooHeavyFiles(pass2Start))
+            if (pass2Keys.contains(normPathKey(f)) && !heavyFlagged.contains(f))
                 heavyFlagged << f;
         if (ok2) {
             QSet<QString> const p2FailedSet(p2FailedFiles.begin(), p2FailedFiles.end());
@@ -1768,16 +1766,35 @@ void SimilarityIndexPanel::onAddFolder()
 
     int const total = toEmbed.size();
 
-    // Two-pass configuration shown in an editable confirm dialog. Defaults: pass 1 uses one worker
-    // per PHYSICAL core with hoops_ai's short budget (benchmarks: the embedding sweet spot is the
-    // physical-core count, not the logical count, which only adds RAM pressure); pass 2 re-adds
-    // only the files that timed out, with a worker count sized to free RAM (heavy assemblies are
-    // memory hungry: round(freeRAM / 4GB)) and a much larger budget. The dialog always shows freshly-computed
-    // recommended defaults (not last-used) so the values are deterministic per machine/state.
-    int physCores = detectPhysicalCores();
-    if (physCores <= 0)
-        physCores = qMax(1, QThread::idealThreadCount());
+    // Two-pass configuration shown in an editable confirm dialog. Defaults: pass 1 embeds the whole
+    // list with hoops_ai's short budget; pass 2 re-adds only the files that timed out, with a worker
+    // count sized to free RAM (heavy assemblies are memory hungry: round(freeRAM / 4GB)) and a much
+    // larger budget. The dialog always shows freshly-computed recommended defaults (not last-used)
+    // so the values are deterministic per machine/state.
+    //
+    // Pass 1 workers default = min(logical processors, free-RAM cap). hoops_ai_native_bridge now
+    // pins each worker's intra-op (BLAS/OpenMP) threads to 1 for the duration of embed_shape_batch,
+    // so workers no longer oversubscribe CPU threads and pass 1 scales up to the LOGICAL processor
+    // count (benchmarks: with 1 thread/worker a 16c/32t box peaked at 32 workers = logical count,
+    // 2.25x the unlimited best). On a workstation free RAM, not CPU, is the first limit: each worker
+    // holds roughly one model footprint in memory, so cap the default at floor(freeRAM / footprint).
+    // If free RAM cannot be read, apply no memory cap and use the logical count alone.
+    int const logicalProcessors = qMax(1, QThread::idealThreadCount());
     quint64 const freeBytes = detectAvailablePhysMemoryBytes();
+    quint64 const pass1FootprintBytes = quint64(kPass1WorkerFootprintMB) * 1024 * 1024;
+    int pass1MemCap = 0;              // 0 = free RAM unknown, no cap applied
+    bool pass1MemLimited = false;     // true when the free-RAM cap, not the logical count, won
+    int defPass1Workers = logicalProcessors;
+    if (freeBytes > 0) {
+        pass1MemCap = static_cast<int>(freeBytes / pass1FootprintBytes);
+        if (pass1MemCap < 1)
+            pass1MemCap = 1;
+        if (pass1MemCap < defPass1Workers) {
+            defPass1Workers = pass1MemCap;
+            pass1MemLimited = true;
+        }
+    }
+
     // Round (not floor) free-RAM/4GB so a machine sitting just under a 4 GB boundary (e.g. 15.7 GB
     // free -> 3.9) rounds up to the expected worker count. Still depends on the free RAM at launch.
     double const freeGb4 = static_cast<double>(freeBytes) / (quint64(4) * 1024 * 1024 * 1024);
@@ -1785,10 +1802,31 @@ void SimilarityIndexPanel::onAddFolder()
     if (memWorkers < 1)
         memWorkers = 1;
 
-    int const defPass1Workers = physCores;
     int const defPass1TimeLimit = 120;
     int const defPass2Workers = memWorkers;
     int const defPass2TimeLimit = 1200;
+
+    // Explain which limit set the pass-1 default so the operator can tell a CPU-bound default from a
+    // RAM-bound one before editing it.
+    double const freeGb = static_cast<double>(freeBytes) / (quint64(1024) * 1024 * 1024);
+    double const footprintGb = static_cast<double>(kPass1WorkerFootprintMB) / 1024.0;
+    QString pass1DefaultNote;
+    if (freeBytes == 0) {
+        pass1DefaultNote = tr("Pass 1 default: %1 workers = logical processors.")
+                               .arg(defPass1Workers);
+    } else if (pass1MemLimited) {
+        pass1DefaultNote = tr("Pass 1 default: %1 workers, limited by free RAM "
+                              "(%2 GB free, ~%3 GB per worker); logical processors: %4.")
+                               .arg(defPass1Workers)
+                               .arg(freeGb, 0, 'f', 1)
+                               .arg(footprintGb, 0, 'f', 0)
+                               .arg(logicalProcessors);
+    } else {
+        pass1DefaultNote = tr("Pass 1 default: %1 workers = logical processors "
+                              "(free RAM allows up to %2).")
+                               .arg(defPass1Workers)
+                               .arg(pass1MemCap);
+    }
 
     QDialog dlg(this);
     dlg.setWindowTitle(tr("Add Folder"));
@@ -1800,6 +1838,13 @@ void SimilarityIndexPanel::onAddFolder()
             tr("(%n unchanged file(s) will be skipped.)", "", m_lastSkippedCount), &dlg));
     dlgLayout->addWidget(new QLabel(
         tr("Pass 1 embeds all files; Pass 2 re-embeds only the ones that time out."), &dlg));
+    dlgLayout->addWidget(new QLabel(pass1DefaultNote, &dlg));
+    auto* pass1CautionLabel = new QLabel(
+        tr("Keep this window visible and avoid other heavy work while it runs: memory above 90% "
+           "sends parts to a slow single-worker pass, and Windows may move a hidden or minimized "
+           "window's work onto efficiency cores."), &dlg);
+    pass1CautionLabel->setWordWrap(true);
+    dlgLayout->addWidget(pass1CautionLabel);
 
     auto* form = new QFormLayout();
     auto makeSpin = [&dlg](int value, int min, int max, int step, const QString& suffix) {

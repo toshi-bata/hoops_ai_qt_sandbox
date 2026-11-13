@@ -303,10 +303,20 @@ The dialog's defaults are auto-detected for the machine and are all editable:
 
 | Field | Default | Notes |
 |-------|---------|-------|
-| Pass 1 workers | number of **physical** CPU cores | The embedding sweet spot; logical cores add little. |
+| Pass 1 workers | number of **logical** processors, capped by `floor(free RAM / 2 GB)` | The native bridge pins each worker's intra-op (BLAS/OpenMP) threads to 1 during embedding, so workers no longer oversubscribe the CPU and Pass 1 scales to the logical count; on a workstation free RAM (≈2 GB per worker) is usually the first limit. |
 | Pass 1 time limit | **120 s** | Short budget so light files stream through quickly. |
 | Pass 2 workers | `round(free RAM / 4 GB)` | Each heavy worker needs several GB of headroom. |
 | Pass 2 time limit | **1200 s** | Generous budget to let a heavy assembly finish. |
+
+The defaults are only a starting point — adjust them for your data and machine:
+
+- Lower **Pass 1 workers** for data with many heavy files, or on a PC with little RAM.
+- When memory use crosses **90%**, hoops_ai defers parts as *heavy* and processes them last with a
+  single worker and no time limit. Running other heavy work on the same PC during the add makes this
+  far more likely.
+- Windows 11 power throttling (EcoQoS) can move work onto efficiency cores when the window is hidden
+  or minimized, slowing the add dramatically. Run large batches on a dedicated machine for
+  predictable throughput.
 
 Raise the **Pass 2 time limit** if large assemblies are still being skipped; lower the **Pass 2
 workers** if Pass 2 runs out of memory.

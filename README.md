@@ -299,7 +299,7 @@ Registering a folder can mix thousands of light parts with a few memory-heavy as
 **Add Folder** runs in two passes. When you pick a folder, a dialog reports how many CAD files were
 found and lets you tune both passes before proceeding:
 
-<img src="docs/images/ui-add-folder-dialog.png" width="440">
+<img src="docs/images/ui-add-folder-dialog.png" width="820">
 
 - **Pass 1 (all files):** embeds every file with many workers and a short per-file time limit. The
   many light parts finish here; a heavy assembly that exceeds the Pass 1 time limit is dropped with

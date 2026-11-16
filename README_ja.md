@@ -7,7 +7,7 @@
 **HOOPS Visualize Desktop**、**HOOPS Exchange**、**HOOPS AI Native Bridge** を組み合わせ、AI 支援の CAD ワークフローを示す Qt サンプルアプリケーションです：
 
 - **MFR (Manufacturing Feature Recognition)** — 読み込んだモデルのすべての面を分類し、認識された製造フィーチャーごとに色分けして凡例を表示します。
-- **Shape similarity comparison** — shape-embeddings モデルを使って、読み込んだ 2 つの部品間のコサイン類似度を計算します。
+- **形状類似度の比較** — shape-embeddings モデルを使って、読み込んだ 2 つの部品間のコサイン類似度を計算します。
 - **Similarity Search panel** — FAISS インデックスを構築／オープンし、CAD ファイルやフォルダー全体を追加し、類似部品を検索し、アセンブリ間の類似部品検索を実行し、部品にタグを付け、インデックス全体をクラスタ化した **Shape Embedding Map** として 3D ビューに可視化します。
 
 HOOPS Visualize Desktop に同梱されている `qt_sandbox` サンプルから派生し、HOOPS AI 統合を加えて拡張したものです。呼び出している C API は、HOOPS AI パッケージを実行する Python インタープリタを埋め込んだコンパニオンリポジトリ
@@ -118,7 +118,7 @@ Exchange — すべてをカバーするため、使用するキーで 3 つす�
    cmake -S . -B build && cmake --build build
    ```
 
-4. サンドボックス本体をビルドします。これは `$HAI_BRIDGE_INSTALL_DIR` ではなく、**repository root**
+4. サンドボックス本体をビルドします。これは `$HAI_BRIDGE_INSTALL_DIR` ではなく、**リポジトリのルート**
    （`hps_qt_sandbox.pro` がある場所）に戻って実行してください — ステップ 3 のブリッジディレクトリにまだいる
    場合は、先にそこへ `cd` で戻ってください：
 
@@ -144,7 +144,7 @@ Exchange — すべてをカバーするため、使用するキーで 3 つす�
    Wayland セッションでは、HOOPS の X11/GLX ベースのウィンドウ埋め込みに XWayland が必要です。
    `QT_QPA_PLATFORM=xcb` で強制してください。
 
-**Notes**
+**補足**
 
 - `libhoops_ai_bridge.so` の ABI は CPython を埋め込んでおり、実行時にターゲットマシン上で一致する共有
   `libpython3.12` が必要です（システムパッケージ、例えば Ubuntu 24.04 の
@@ -182,7 +182,7 @@ MFR モデルと類似部品検索（埋め込み）モデルは、**File** メ�
 このアプリは `hoops_ai_native_bridge` と同じ再配布の枠組みに適合します（その README を参照）。`hoops_ai` の
 トレースした `site-packages` を含むパッケージをビルドし、その隣にアプリ + ランタイムを配置すれば、フォルダー全体が
 単純なコピーで動作します — 環境変数は不要です。`HVISUALIZE_INSTALL_DIR` / `HEXCHANGE_INSTALL_DIR` /
-`HOOPS_AI_HOME` 変数が**unset**の場合、`main.cpp` は次のレイアウトを使って、すべてのリソース
+`HOOPS_AI_HOME` 変数が**未設定**の場合、`main.cpp` は次のレイアウトを使って、すべてのリソース
 ディレクトリを実行ファイルからの相対で解決します：
 
 ```
@@ -215,7 +215,7 @@ MFR モデルと類似部品検索（埋め込み）モデルは、**File** メ�
 
 **Windows**
 
-- python.org の **Python 3.12**。これにより `python312.dll` が PEP 514 レジストリ経由で見つかり、**and** 本物の
+- python.org の **Python 3.12**。これにより `python312.dll` が PEP 514 レジストリ経由で見つかり、**かつ** 本物の
   `python.exe` が存在するようになります — 後者は並列の Add Folder ワーカー（`multiprocessing` の spawn）に
   必要です。これがないと、並列埋め込みは無効化され、1 ワーカーに制限されます。
 - **Visual C++ redistributable**（x64）が必要です。
@@ -259,10 +259,10 @@ MFR モデルと類似部品検索（埋め込み）モデルは、**File** メ�
 
 ツールバーには 2 つのモードがあります：
 
-- **Listing mode**（Search と Assembly Search の両方が OFF）：リストにはインデックスに登録された部品が表示されます。
+- **一覧モード**（Search と Assembly Search の両方が OFF）：リストにはインデックスに登録された部品が表示されます。
   **Tag** フィルター（All / Tagged / 特定のタグ）はここで適用されます。
-- **Search mode**（Search または Assembly Search が ON、相互排他）：リストにはクエリ結果が表示され、
-  **similarity slider**（最小コサイン／ブレンドスコア）でフィルターされます。このモードでは Tag フィルターは
+- **検索モード**（Search または Assembly Search が ON、相互排他）：リストにはクエリ結果が表示され、
+  **類似度スライダー**（最小コサイン／ブレンドスコア）でフィルターされます。このモードでは Tag フィルターは
   無効になります。
 
 <p align="center">
@@ -276,14 +276,14 @@ MFR モデルと類似部品検索（埋め込み）モデルは、**File** メ�
 | <img src="Resources/simOpen.png" width="22"> | **Open Index…** | 既存の `.faiss` インデックスを開くか、選択したパスに新規作成し、それを現在のインデックスにします。類似部品検索モデルが読み込まれている必要があります。 |
 | <img src="Resources/simAddModel.png" width="22"> | **Add Current Model** | 現在 3D ビューに読み込まれているモデルを埋め込み、インデックスに登録します。 |
 | <img src="Resources/simAddFolder.png" width="22"> | **Add Folder…** | 2 パス戦略を使って、フォルダー内のサポートされるすべての CAD ファイルを一括で埋め込み・登録します（下記を参照）。 |
-| <img src="Resources/simSearch.png" width="22"> | **Search with Current Model** *(toggle)* | ON：現在のモデルに類似する **parts** をインデックスからランク付けします（部品ごとのマッチング）。OFF：一覧モードに戻ります。 |
-| <img src="Resources/simSearchAssembly.png" width="22"> | **Search Similar Assembly** *(toggle)* | ON：現在のモデルに類似する **assemblies** 全体をインデックスからランク付けします（アセンブリ対アセンブリ：TF-IDF の希少部品重み付けと bag-of-parts ブレンドを用いた最適な 1 対 1 の部品マッチング）。OFF：一覧モードに戻ります。Search とは相互排他です。 |
-| <img src="Resources/simMap.png" width="22"> | **Shape Embedding Map** | インデックスの **tagged** 部品を 2D/3D のクラスタマップ（1 ファイルにつき 1 点、タグごとに色分け）に投影し、3D ビューに表示します。パネルで部品を選択するとその点がハイライトされ、点を選ぶと対応する部品が選択されます。各凡例の行にはそのグループの表示／非表示を切り替えるチェックボックスがあります。 |
+| <img src="Resources/simSearch.png" width="22"> | **Search with Current Model** *(toggle)* | ON：現在のモデルに類似する**部品**をインデックスからランク付けします（部品ごとのマッチング）。OFF：一覧モードに戻ります。 |
+| <img src="Resources/simSearchAssembly.png" width="22"> | **Search Similar Assembly** *(toggle)* | ON：現在のモデルに類似する**アセンブリ**全体をインデックスからランク付けします（アセンブリ対アセンブリ：TF-IDF の希少部品重み付けと bag-of-parts ブレンドを用いた最適な 1 対 1 の部品マッチング）。OFF：一覧モードに戻ります。Search とは相互排他です。 |
+| <img src="Resources/simMap.png" width="22"> | **Shape Embedding Map** | インデックスの**タグ付き**部品を 2D/3D のクラスタマップ（1 ファイルにつき 1 点、タグごとに色分け）に投影し、3D ビューに表示します。パネルで部品を選択するとその点がハイライトされ、点を選ぶと対応する部品が選択されます。各凡例の行にはそのグループの表示／非表示を切り替えるチェックボックスがあります。 |
 | <img src="Resources/simAssignTag.png" width="22"> | **Assign Tag…** | （検索モード）類似度スライダーで現在表示されているすべての部品にタグを割り当てます — 表示中のクラスタがそのタグになります。 |
 | <img src="Resources/simRemoveTag.png" width="22"> | **Remove Tag** | （一覧モード）Tag フィルターで選択したタグを、そのすべての部品から削除します。 |
 | <img src="Resources/simClose.png" width="22"> | **Close** | 現在のインデックスを閉じます（ディスク上の `.faiss`/`.meta` ファイルは保持されます）。 |
 
-**Typical workflow:** *Open Index → Add Current Model / Add Folder → Search（または Assembly Search）→
+**典型的なワークフロー:** *Open Index → Add Current Model / Add Folder → Search（または Assembly Search）→
 結果に Assign Tag → Shape Embedding Map* で、タグ付けされたクラスタを 3D ビューで確認します。
 
 #### Add Folder — 2 パス埋め込み
@@ -292,12 +292,12 @@ MFR モデルと類似部品検索（埋め込み）モデルは、**File** メ�
 **Add Folder** は 2 パスで実行します。フォルダーを選ぶと、見つかった CAD ファイル数を報告し、処理を進める前に
 両方のパスを調整できるダイアログが表示されます：
 
-<img src="docs/images/ui-add-folder-dialog.png" width="440">
+<img src="docs/images/ui-add-folder-dialog.png" width="820">
 
-- **Pass 1 (all files):** 多数のワーカーと短いファイルごとの時間制限で、すべてのファイルを埋め込みます。
+- **Pass 1（全ファイル）:** 多数のワーカーと短いファイルごとの時間制限で、すべてのファイルを埋め込みます。
   多くの軽い部品はここで完了します。Pass 1 の時間制限を超える重いアセンブリは *Timeout* として除外され、
   Pass 2 のキューに入れられます。
-- **Pass 2 (heavy retry):** タイムアウトしたファイルだけを、より大きな時間制限と少数のワーカーで埋め直します
+- **Pass 2（Heavy の再試行）:** タイムアウトしたファイルだけを、より大きな時間制限と少数のワーカーで埋め直します
   （1 つの重いファイルはワーカーを増やしても速くなりません）。タイムアウトではなく実際の CAD エラーで失敗した
   ファイルは再試行されません。Pass 2 の後もタイムアウトするものはスキップされます。
 
@@ -305,7 +305,7 @@ MFR モデルと類似部品検索（埋め込み）モデルは、**File** メ�
 
 | フィールド | 既定値 | 備考 |
 |-------|---------|-------|
-| Pass 1 workers | **logical** プロセッサ数、`floor((free RAM − 10% of total RAM) / 0.75 GB)` で上限 | ネイティブブリッジは埋め込みの間、各ワーカーの intra-op（BLAS/OpenMP）スレッドを 1 本に固定するため、ワーカーが CPU を過剰使用することはなくなり、Pass 1 は論理プロセッサ数までスケールします。ワークステーションでは空き RAM が最初の制約になります。1 ワーカーあたり約 0.62 GB を実測し（32 GB のノートPC、TMCAD の 500 ファイル、20 ワーカー）、少し余裕を足して 1 ワーカーあたり約 0.75 GB としています。10% の予備は、使用率を 90% の Heavy フォールバックの線より下に保ちます。 |
+| Pass 1 workers | **論理**プロセッサ数、`floor((free RAM − 10% of total RAM) / 0.75 GB)` で上限 | ネイティブブリッジは埋め込みの間、各ワーカーの intra-op（BLAS/OpenMP）スレッドを 1 本に固定するため、ワーカーが CPU を過剰使用することはなくなり、Pass 1 は論理プロセッサ数までスケールします。ワークステーションでは空き RAM が最初の制約になります。1 ワーカーあたり約 0.62 GB を実測し（32 GB のノートPC、TMCAD の 500 ファイル、20 ワーカー）、少し余裕を足して 1 ワーカーあたり約 0.75 GB としています。10% の予備は、使用率を 90% の Heavy フォールバックの線より下に保ちます。 |
 | Pass 1 time limit | **120 s** | 軽いファイルが素早く流れるよう、短い割り当てにします。 |
 | Pass 2 workers | `round(free RAM / 4 GB)` | 各 Heavy ワーカーには数 GB の余裕が必要です。 |
 | Pass 2 time limit | **1200 s** | 重いアセンブリが完了できるよう、余裕のある割り当てにします。 |
@@ -333,7 +333,7 @@ workers** を下げてください。
 
 ## 重要な注意
 
-- `HVISUALIZE_INSTALL_DIR` / `HEXCHANGE_INSTALL_DIR` は、HOOPS AI が同梱する **same Exchange version**
+- `HVISUALIZE_INSTALL_DIR` / `HEXCHANGE_INSTALL_DIR` は、HOOPS AI が同梱するものと**同じバージョンの Exchange**
   （venv の `hoops_exchange`）でなければなりません。共有される低レベルの `Tf*` カーネル DLL はプロセス内で単一の
   インスタンスに集約されるため、不一致はクラッシュを引き起こします。この共有カーネルにはさらに 2 つの帰結が
   あります：**HOOPS AI must be initialized before the first Exchange import**（このアプリは起動時にそうしています）、
@@ -343,8 +343,8 @@ workers** を下げてください。
 
 ## ライセンス
 
-このリポジトリのコードは [MIT License](LICENSE) で公開されています。これは **only this
-repository's own source** のみを対象とします — Tech Soft 3D の SDK（HOOPS Visualize Desktop、HOOPS Exchange、
+このリポジトリのコードは [MIT License](LICENSE) で公開されています。これは**このリポジトリ自身の
+ソースのみ**を対象とします — Tech Soft 3D の SDK（HOOPS Visualize Desktop、HOOPS Exchange、
 HOOPS AI の各パッケージ）、学習済みチェックポイント、および利用者が埋め込むライセンスキーは、ここの MIT License
 ではなく、利用者と Tech Soft 3D との契約に従います。同梱される Qt ライブラリは Qt 自身のライセンスに従います。
 これらのコンポーネントのいずれかを再配布できるかどうかは別の問題です — 上記の **Redistribution** の注意を参照して

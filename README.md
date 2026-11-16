@@ -16,6 +16,11 @@ integration. The C API it calls lives in a companion repository,
 [`hoops_ai_native_bridge`](https://github.com/toshi-bata/hoops_ai_native_bridge), which embeds a Python interpreter running the
 HOOPS AI package.
 
+For the background and results behind this sample, see
+[HOOPS AI Inside a HOOPS Visualize Desktop + Exchange Application: Similar-Part Search Across 10,000 CAD Files](https://forum.techsoft3d.com/t/hoops-ai-inside-a-hoops-visualize-desktop-exchange-application-similar-part-search-across-10-000-cad-files/5203).
+The bridge itself is introduced in
+[Using HOOPS AI from a Fully Local Desktop Application](https://forum.techsoft3d.com/t/using-hoops-ai-from-a-fully-local-desktop-application/5200).
+
 > **This is a proof of concept, not a product.** It exists to demonstrate that HOOPS AI can be made
 > to work inside a native HOOPS Visualize Desktop + Exchange application, and is not intended to be
 > shipped as is. The trained models used here (MFR and similarity search) are the sample `.ckpt`
@@ -34,7 +39,7 @@ HOOPS AI package.
 | --- | --- |
 | HOOPS Visualize Desktop | 2026.2.0 |
 | HOOPS Exchange | 2026.2.0 (must match the version used by HOOPS AI — see notes below) |
-| HOOPS AI | V1.1 |
+| HOOPS AI | V1.1 (tested with 1.1.1) |
 | `hoops_ai_native_bridge` | matching build |
 | Qt | 6.5.3 (msvc2019_64 on Windows / gcc_64 on Linux, or a distro Qt6 package) |
 | Python | 3.12 |
@@ -308,6 +313,9 @@ The dialog's defaults are auto-detected for the machine and are all editable:
 | Pass 2 workers | `round(free RAM / 4 GB)` | Each heavy worker needs several GB of headroom. |
 | Pass 2 time limit | **1200 s** | Generous budget to let a heavy assembly finish. |
 
+The measurements behind this default are in
+[GPU vs CPU for the HOOPS AI Embeddings Pipeline: The Numbers and a 2.25x Indexing Fix](https://forum.techsoft3d.com/t/gpu-vs-cpu-for-the-hoops-ai-embeddings-pipeline-the-numbers-and-a-2-25x-indexing-fix/5253).
+
 The defaults are only a starting point — adjust them for your data and machine:
 
 - Lower **Pass 1 workers** for data with many heavy files, or on a PC with little RAM.
@@ -335,3 +343,12 @@ workers** if Pass 2 runs out of memory.
   `HoopsAI_Shutdown()`.
 - If a `Qt6Core.dll` (etc.) of a different version than the one used to build sits next to the
   Release executable, you may get entry-point errors at runtime. Avoid mixing Qt DLL versions.
+
+## License
+
+The code in this repository is released under the [MIT License](LICENSE). That covers **only this
+repository's own source** — the Tech Soft 3D SDKs (the HOOPS Visualize Desktop, HOOPS Exchange, and
+HOOPS AI packages), the pretrained checkpoints, and any license key you embed are governed by your
+own agreement with Tech Soft 3D, not by the MIT License here. The bundled Qt libraries follow Qt's
+own licensing. Whether any of these components may be redistributed is a separate question — see the
+**Redistribution** note above.

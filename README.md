@@ -1,4 +1,8 @@
+<!-- A Japanese translation is maintained in README_ja.md. When you change either README, update the other so both languages stay in sync. -->
+
 # hoops_ai_qt_sandbox
+
+**Languages:** English | [日本語](README_ja.md)
 
 A Qt sample application that combines **HOOPS Visualize Desktop**, **HOOPS Exchange**, and the
 **HOOPS AI Native Bridge** to demonstrate AI-assisted CAD workflows:
